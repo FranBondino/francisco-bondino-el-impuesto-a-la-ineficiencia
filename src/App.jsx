@@ -5,7 +5,8 @@ import {
   LifeBuoy, Target, Calculator, AlertOctagon, Bus,
   Clock, Brain, Zap, GitCommit, LineChart, Lightbulb,
   UserCheck, BookOpen, MessageSquare, Rocket,
-  ChevronLeft, ChevronRight, Fingerprint
+  ChevronLeft, ChevronRight, Fingerprint,
+  CheckCircle2
 } from 'lucide-react';
 
 // Common tech-corporate styling classes
@@ -81,10 +82,17 @@ const slidesData = [
   },
   {
     id: 5,
-    layout: 'center_focus',
+    layout: 'bus_factor_comparison',
     title: 'El "Bus Factor"',
-    text: '¿Cuántas personas deben desaparecer de una organización para que esta se paralice?',
-    bigNumber: '80',
+    subtitle: '¿Cuántas personas deben desaparecer de una organización para que esta se paralice?',
+    bad: {
+      title: 'BUS FACTOR ALTO',
+      desc: 'El conocimiento y la operación están centralizados en una sola persona o muy pocas. Si faltan, el sistema colapsa.',
+    },
+    good: {
+      title: 'BUS FACTOR BAJO',
+      desc: 'El conocimiento está descentralizado en sistemas o delegados. Si la pieza clave no está, la organización fluye.',
+    },
     bg: TECH_BG,
     textColor: 'text-slate-100'
   },
@@ -195,6 +203,7 @@ const SectionRenderer = ({ slide }) => {
   const isStats = slide.layout === 'stats';
   const isSpof = slide.layout === 'spof';
   const isCenterFocus = slide.layout === 'center_focus';
+  const isBusFactorComparison = slide.layout === 'bus_factor_comparison';
   const isFeatures = slide.layout === 'features';
   const isTools = slide.layout === 'tools';
   const isLimitations = slide.layout === 'limitations';
@@ -351,6 +360,46 @@ const SectionRenderer = ({ slide }) => {
           <div className="w-3 h-3 rounded-full bg-rose-500 animate-pulse shrink-0 tracking-widest"></div>
           <p className="text-rose-400 font-mono text-sm md:text-base selection:bg-rose-500/30">{slide.alert}</p>
         </motion.div>
+      </MotionContainer>
+    );
+  }
+
+  if (isBusFactorComparison) {
+    return (
+      <MotionContainer bg={slide.bg} textColor={slide.textColor}>
+        <motion.div initial="hidden" animate="visible" variants={fadeUpVariants} className="mb-16 text-center">
+          <div className="inline-flex items-center gap-3 mb-6 bg-indigo-950/30 border border-indigo-900/50 px-4 py-1.5 rounded-full text-indigo-400 text-sm font-mono uppercase tracking-widest">
+            <Bus size={16} /> Métrica de Continuidad
+          </div>
+          <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-slate-100">{slide.title}</h2>
+          <p className="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto font-light">{slide.subtitle}</p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-12 w-full max-w-6xl mx-auto mb-12">
+          {/* BUS FACTOR ALTO (BAD) */}
+          <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }} className={`${CARD_BG} p-10 rounded-xl relative overflow-hidden border border-rose-900/30 shadow-[0_0_30px_-10px_rgba(244,63,94,0.15)]`}>
+            <div className="absolute top-0 right-0 w-2 h-full bg-rose-500/50"></div>
+            <div className="flex items-center gap-6 mb-8 border-b border-[#1E293B] pb-6">
+               <div className="bg-rose-950/50 p-4 rounded-full text-rose-500 border border-rose-900/50 shadow-inner">
+                   <XCircle size={40} strokeWidth={2.5} />
+               </div>
+               <h3 className="text-3xl font-black text-rose-100 tracking-tight">{slide.bad.title}</h3>
+            </div>
+            <p className="text-slate-300 text-xl font-light leading-relaxed">{slide.bad.desc}</p>
+          </motion.div>
+
+          {/* BUS FACTOR BAJO (GOOD) */}
+          <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.6 }} className={`${CARD_BG} p-10 rounded-xl relative overflow-hidden border border-emerald-900/30 shadow-[0_0_30px_-10px_rgba(16,185,129,0.15)]`}>
+            <div className="absolute top-0 right-0 w-2 h-full bg-emerald-500/50"></div>
+            <div className="flex items-center gap-6 mb-8 border-b border-[#1E293B] pb-6">
+               <div className="bg-emerald-950/50 p-4 rounded-full text-emerald-500 border border-emerald-900/50 shadow-inner">
+                   <CheckCircle2 size={40} strokeWidth={2.5} />
+               </div>
+               <h3 className="text-3xl font-black text-emerald-100 tracking-tight">{slide.good.title}</h3>
+            </div>
+            <p className="text-slate-300 text-xl font-light leading-relaxed">{slide.good.desc}</p>
+          </motion.div>
+        </div>
       </MotionContainer>
     );
   }
