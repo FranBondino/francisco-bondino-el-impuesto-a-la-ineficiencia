@@ -9,6 +9,9 @@ import {
   CheckCircle2
 } from 'lucide-react';
 
+import busFactorAltoImg from './assets/bus-factor-alto.png';
+import busFactorBajoImg from './assets/bus-factor-bajo.png';
+
 // Common tech-corporate styling classes
 const TECH_BG = "bg-[#0B1120]"; // Very dark slate/blue
 const CARD_BG = "bg-[#111827]/80 backdrop-blur-md border border-[#1E293B] shadow-[0_4px_24px_-8px_rgba(0,0,0,0.5)]";
@@ -88,10 +91,12 @@ const slidesData = [
     bad: {
       title: 'BUS FACTOR ALTO',
       desc: 'El conocimiento y la operación están centralizados en una sola persona o muy pocas. Si faltan, el sistema colapsa.',
+      image: busFactorAltoImg
     },
     good: {
       title: 'BUS FACTOR BAJO',
       desc: 'El conocimiento está descentralizado en sistemas o delegados. Si la pieza clave no está, la organización fluye.',
+      image: busFactorBajoImg
     },
     bg: TECH_BG,
     textColor: 'text-slate-100'
@@ -385,7 +390,11 @@ const SectionRenderer = ({ slide }) => {
                </div>
                <h3 className="text-3xl font-black text-rose-100 tracking-tight">{slide.bad.title}</h3>
             </div>
-            <p className="text-slate-300 text-xl font-light leading-relaxed">{slide.bad.desc}</p>
+            <p className="text-slate-300 text-xl font-light leading-relaxed mb-8">{slide.bad.desc}</p>
+            <div className="rounded-xl overflow-hidden border border-[#1E293B] shadow-2xl relative group">
+                <div className="absolute inset-0 bg-rose-500/10 mix-blend-overlay group-hover:bg-transparent transition-colors duration-500"></div>
+                <img src={slide.bad.image} alt="Bus Factor Alto" className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" />
+            </div>
           </motion.div>
 
           {/* BUS FACTOR BAJO (GOOD) */}
@@ -397,7 +406,11 @@ const SectionRenderer = ({ slide }) => {
                </div>
                <h3 className="text-3xl font-black text-emerald-100 tracking-tight">{slide.good.title}</h3>
             </div>
-            <p className="text-slate-300 text-xl font-light leading-relaxed">{slide.good.desc}</p>
+            <p className="text-slate-300 text-xl font-light leading-relaxed mb-8">{slide.good.desc}</p>
+            <div className="rounded-xl overflow-hidden border border-[#1E293B] shadow-2xl relative group">
+                <div className="absolute inset-0 bg-emerald-500/10 mix-blend-overlay group-hover:bg-transparent transition-colors duration-500"></div>
+                <img src={slide.good.image} alt="Bus Factor Bajo" className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" />
+            </div>
           </motion.div>
         </div>
       </MotionContainer>
