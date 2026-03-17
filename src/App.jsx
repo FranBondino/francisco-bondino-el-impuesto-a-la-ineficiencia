@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 
 import busFactorAltoImg from './assets/bus-factor-alto.png';
-import busFactorBajoImg from './assets/bus-factor-bajo.png';
+import busFactorBajoImg from './assets/bus-factor-bajo-nuevo.png';
 import arqueroImg from './assets/arquero.png';
 import spofImg from './assets/spof.png';
 
