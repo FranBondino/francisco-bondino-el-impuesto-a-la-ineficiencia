@@ -11,6 +11,8 @@ import {
 
 import busFactorAltoImg from './assets/bus-factor-alto.png';
 import busFactorBajoImg from './assets/bus-factor-bajo.png';
+import arqueroImg from './assets/arquero.png';
+import spofImg from './assets/spof.png';
 
 // Common tech-corporate styling classes
 const TECH_BG = "bg-[#0B1120]"; // Very dark slate/blue
@@ -85,6 +87,15 @@ const slidesData = [
   },
   {
     id: 4,
+    layout: 'image_caption',
+    title: 'El "Impuesto a la Ineficiencia"',
+    subtitle: 'Uno siente que está siempre atajando penales',
+    image: arqueroImg,
+    bg: TECH_BG,
+    textColor: 'text-slate-100'
+  },
+  {
+    id: 5,
     layout: 'stats',
     title: 'La Matemática del Error',
     subtitle: 'No es solo pérdida de tiempo, es pérdida de precisión. La carga manual genera errores costosos.',
@@ -97,7 +108,7 @@ const slidesData = [
     textColor: 'text-slate-100'
   },
   {
-    id: 5,
+    id: 6,
     layout: 'spof',
     title: 'El Riesgo Real: SPOF',
     subtitle: 'Single Point of Failure - El punto único de falla que puede paralizar todo.',
@@ -105,11 +116,12 @@ const slidesData = [
     a1: 'Un solo empleado, un solo sistema o un solo proceso que si falla, todo se detiene.',
     q2: '¿Qué pasa cuando la persona clave se enferma, se va de vacaciones o renuncia?',
     alert: 'PUNTO ÚNICO DE FALLA: Romina es crucial para la integración. FALLA DEL SISTEMA',
+    image: spofImg,
     bg: TECH_BG,
     textColor: 'text-slate-100'
   },
   {
-    id: 6,
+    id: 7,
     layout: 'bus_factor_comparison',
     title: 'El "Bus Factor"',
     subtitle: '¿Cuántas personas deben desaparecer de una organización para que esta se paralice?',
@@ -127,10 +139,10 @@ const slidesData = [
     textColor: 'text-slate-100'
   },
   {
-    id: 7,
+    id: 8,
     layout: 'features',
     title: 'Sistemas Autónomos: Escalar sin Esfuerzo',
-    subtitle: 'La IA no es una herramienta, es la infraestructura que permite que la empresa escale sin que tú seas el motor.',
+    subtitle: 'La IA no es una herramienta, es la infraestructura que permite que la empresa escale sin que vos seas el motor.',
     items: [
       {
         icon: <Zap className="text-indigo-400" size={32} />,
@@ -152,7 +164,7 @@ const slidesData = [
     textColor: 'text-slate-100'
   },
   {
-    id: 8,
+    id: 9,
     layout: 'tools',
     title: 'Soberanía y Control Total',
     subtitle: 'Hacia un modelo de gestión basado en la transparencia absoluta de los datos, eliminando la dependencia de reportes manuales.',
@@ -183,10 +195,10 @@ const slidesData = [
     textColor: 'text-slate-100'
   },
   {
-    id: 9,
+    id: 10,
     layout: 'limitations',
     title: 'Lo que la IA no tiene',
-    subtitle: 'Olvidemos la ciencia ficción. La IA real es una herramienta accesible que puede trabajar con uno todos los días.',
+    subtitle: 'Olvidemos la ciencia ficción. La IA real es una herramienta accesible que puede trabajar con vos todos los días.',
     items: [
       { icon: <Lightbulb size={28} className="text-amber-400" />, text: 'Pensamiento abstracto' },
       { icon: <UserCheck size={28} className="text-rose-400" />, text: 'Sentido común' },
@@ -197,7 +209,7 @@ const slidesData = [
     textColor: 'text-slate-100'
   },
   {
-    id: 10,
+    id: 11,
     layout: 'questions',
     title: 'El Debate',
     subtitle: 'Tres preguntas clave para reflexionar sobre la situación actual de cada uno',
@@ -210,10 +222,10 @@ const slidesData = [
     textColor: 'text-slate-100'
   },
   {
-    id: 11,
+    id: 12,
     layout: 'conclusion',
     title: 'El Momento de Cambiar',
-    subtitle: 'La pregunta no es si puedes permitirte la automatización. Es si puedes permitirte no hacerla.',
+    subtitle: 'La pregunta no es si podés permitirte la automatización. Es si podés permitirte no hacerla.',
     points: ['Soltar la operación', 'Enfocarse en liderar', 'Escalabilidad real'],
     footer: 'El verdadero liderazgo no está en hacer más, sino en construir sistemas autónomos.',
     bg: TECH_BG,
@@ -262,6 +274,7 @@ const SectionRenderer = ({ slide }) => {
   const isQuestions = slide.layout === 'questions';
   const isConclusion = slide.layout === 'conclusion';
   const isTitleCard = slide.layout === 'title_card';
+  const isImageCaption = slide.layout === 'image_caption';
 
   if (isTitleCard) {
     return (
@@ -413,12 +426,12 @@ const SectionRenderer = ({ slide }) => {
               transition={{ delay: 0.4 + i * 0.2 }}
               className={`${CARD_BG} p-8 rounded-xl flex items-center gap-8`}
             >
-              <div className="w-1/3 text-right">
-                <div className={`text-5xl md:text-7xl font-black ${HIGHLIGHT_TEXT} tracking-tighter`}>
+              <div className="w-[40%] text-right">
+                <div className={`text-5xl md:text-7xl font-black ${HIGHLIGHT_TEXT} tracking-tighter whitespace-nowrap`}>
                   {stat.value}
                 </div>
               </div>
-              <div className="w-2/3 border-l border-[#1E293B] pl-8">
+              <div className="w-[60%] border-l border-[#1E293B] pl-8">
                 <h3 className="text-xl font-bold text-white mb-2">{stat.label}</h3>
                 <p className="text-sm text-slate-400 font-light">{stat.desc}</p>
               </div>
@@ -432,33 +445,44 @@ const SectionRenderer = ({ slide }) => {
   if (isSpof) {
     return (
       <MotionContainer bg={slide.bg} textColor={slide.textColor}>
-        <motion.div initial="hidden" animate="visible" variants={fadeUpVariants} className="mb-16">
-          <div className="inline-flex items-center gap-3 mb-6 bg-rose-950/30 border border-rose-900/50 px-4 py-1.5 rounded-full text-rose-400 text-sm font-mono uppercase tracking-widest">
-            <AlertOctagon size={16} /> Riesgo Estructural
+        <motion.div initial="hidden" animate="visible" variants={fadeUpVariants} className="mb-6">
+          <div className="inline-flex items-center gap-3 mb-4 bg-rose-950/30 border border-rose-900/50 px-4 py-1.5 rounded-full text-rose-400 text-xs font-mono uppercase tracking-widest">
+            <AlertOctagon size={14} /> Riesgo Estructural
           </div>
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-slate-100">{slide.title}</h2>
-          <p className="text-xl md:text-2xl text-slate-400 max-w-4xl font-light">{slide.subtitle}</p>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-slate-100">{slide.title}</h2>
+          <p className="text-lg md:text-xl text-slate-400 max-w-4xl font-light">{slide.subtitle}</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 w-full max-w-5xl mb-12">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className={`${CARD_BG} p-8 rounded-xl`}>
-            <h3 className="text-slate-500 font-mono text-sm mb-4 tracking-widest uppercase border-b border-[#1E293B] pb-4">{slide.q1}</h3>
-            <p className="text-slate-300 text-lg font-light leading-relaxed">{slide.a1}</p>
+        <div className="grid md:grid-cols-2 gap-6 w-full max-w-5xl mb-6">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className={`${CARD_BG} p-6 rounded-xl`}>
+            <h3 className="text-slate-500 font-mono text-xs mb-2 tracking-widest uppercase border-b border-[#1E293B] pb-2">{slide.q1}</h3>
+            <p className="text-slate-300 text-base font-light leading-relaxed">{slide.a1}</p>
           </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className={`${CARD_BG} p-8 rounded-xl relative overflow-hidden`}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className={`${CARD_BG} p-6 rounded-xl relative overflow-hidden`}>
             <div className="absolute top-0 right-0 w-2 h-full bg-rose-500/50"></div>
-            <h3 className="text-slate-500 font-mono text-sm mb-4 tracking-widest uppercase border-b border-[#1E293B] pb-4">El Problema:</h3>
-            <p className="text-slate-300 text-lg font-light leading-relaxed">{slide.q2}</p>
+            <h3 className="text-slate-500 font-mono text-xs mb-2 tracking-widest uppercase border-b border-[#1E293B] pb-2">El Problema:</h3>
+            <p className="text-slate-300 text-base font-light leading-relaxed">{slide.q2}</p>
           </motion.div>
         </div>
 
         <motion.div
           initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.8 }}
-          className="w-full max-w-5xl bg-rose-950/20 border border-rose-900/50 p-6 rounded-xl flex items-center gap-6"
+          className="w-full max-w-5xl bg-rose-950/20 border border-rose-900/50 p-4 rounded-xl flex items-center gap-4 mb-6"
         >
-          <div className="w-3 h-3 rounded-full bg-rose-500 animate-pulse shrink-0 tracking-widest"></div>
-          <p className="text-rose-400 font-mono text-sm md:text-base selection:bg-rose-500/30">{slide.alert}</p>
+          <div className="w-2 h-2 rounded-full bg-rose-500 animate-pulse shrink-0 tracking-widest"></div>
+          <p className="text-rose-400 font-mono text-xs md:text-sm selection:bg-rose-500/30">{slide.alert}</p>
         </motion.div>
+
+        {slide.image && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1, duration: 0.8 }}
+            className="max-w-4xl w-full rounded-2xl overflow-hidden border border-rose-900/30 shadow-2xl mx-auto"
+          >
+            <img src={slide.image} alt="SPOF Visualization" className="w-full max-h-[30vh] object-cover" />
+          </motion.div>
+        )}
       </MotionContainer>
     );
   }
@@ -710,6 +734,29 @@ const SectionRenderer = ({ slide }) => {
             </p>
           </motion.div>
         </div>
+      </MotionContainer>
+    );
+  }
+
+  if (isImageCaption) {
+    return (
+      <MotionContainer bg={slide.bg} textColor={slide.textColor} className="flex flex-col items-center">
+        <motion.div initial="hidden" animate="visible" variants={fadeUpVariants} className="text-center mb-12">
+          <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-slate-100">{slide.title}</h2>
+          <p className="text-2xl md:text-4xl text-blue-400 font-light italic">
+            "{slide.subtitle}"
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="relative max-w-4xl w-full rounded-2xl overflow-hidden border border-slate-800 shadow-2xl"
+        >
+          <img src={slide.image} alt={slide.title} className="w-full h-auto object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent opacity-40"></div>
+        </motion.div>
       </MotionContainer>
     );
   }
