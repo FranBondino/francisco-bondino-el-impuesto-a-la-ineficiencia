@@ -6,7 +6,7 @@ import {
   Clock, Brain, Zap, GitCommit, LineChart, Lightbulb,
   UserCheck, BookOpen, MessageSquare, Rocket,
   ChevronLeft, ChevronRight, Fingerprint,
-  CheckCircle2
+  CheckCircle2, Award
 } from 'lucide-react';
 
 import busFactorAltoImg from './assets/bus-factor-alto.png';
@@ -22,6 +22,15 @@ const SECONDARY_ACCENT = "text-cyan-400";
 const slidesData = [
   {
     id: 1,
+    layout: 'title_card',
+    title: 'El impuesto a la Ineficiencia: Cómo la IA te devuelve el control de tu empresa',
+    presenter: 'Francisco Bondino',
+    position: 'Ingeniero en Sistemas Informáticos',
+    bg: TECH_BG,
+    textColor: 'text-slate-100'
+  },
+  {
+    id: 2,
     layout: 'intro',
     title: 'La Paradoja del Crecimiento',
     subtitle: 'El éxito genera más trabajo manual, más fricción y más estrés operacional.',
@@ -34,32 +43,48 @@ const slidesData = [
     textColor: 'text-slate-100'
   },
   {
-    id: 2,
+    id: 3,
     layout: 'columns',
     title: 'El "Impuesto a la Ineficiencia"',
-    subtitle: 'Un costo silencioso que todos pagamos sin darnos cuenta. Cada dia perdemos tiempo valioso en tareas que podrian automatizarse.',
+    subtitle: 'Un costo silencioso que limita la escalabilidad. No es solo tiempo perdido, es fricción estratégica que frena el crecimiento.',
+    isCrisis: true, // New flag for specific styling
     cols: [
       {
-        icon: <FileText size={24} className="text-blue-400 mb-4" />,
-        title: 'En Administración',
-        items: ['Horas al día cargando planillas a mano y analizandolas.']
+        icon: <FileText size={24} className="text-amber-400 mb-4" />,
+        title: 'Gestión Estratégica',
+        impact: 'Costo de Oportunidad',
+        items: [
+          'Datos fragmentados que retrasan decisiones clave',
+          'Dependencia de planillas manuales propensas a errores',
+          'Falta de visibilidad real del ROI por canal'
+        ]
       },
       {
-        icon: <LifeBuoy size={24} className="text-cyan-400 mb-4" />,
-        title: 'En Soporte',
-        items: ['Preguntas repetidas que se responden mil veces', 'Formularios que se llenan manualmente', 'Respuestas que se copian y pegan']
+        icon: <LifeBuoy size={24} className="text-amber-400 mb-4" />,
+        title: 'Operaciones y Equipo',
+        impact: 'Fuga de Talento',
+        items: [
+          'Talento senior atrapado en tareas repetitivas',
+          'Inconsistencia en procesos críticos del negocio',
+          'Memoria institucional inexistente (todo está en cabezas)'
+        ]
       },
       {
-        icon: <Target size={24} className="text-indigo-400 mb-4" />,
-        title: 'En Ventas',
-        items: ['Follow-up manual en CRM', 'Propuestas que se copian', 'Seguimiento de leads perdido']
+        icon: <Target size={24} className="text-amber-400 mb-4" />,
+        title: 'Ventas y Crecimiento',
+        impact: 'Fuga de Ingresos',
+        items: [
+          'Leads que se enfrían por falta de respuesta inmediata',
+          'Pipeline invisible: oportunidades que se "caen"',
+          'Dificultad para escalar el volumen de cierres'
+        ]
       }
     ],
     bg: TECH_BG,
     textColor: 'text-slate-100'
   },
   {
-    id: 3,
+    id: 4,
     layout: 'stats',
     title: 'La Matemática del Error',
     subtitle: 'No es solo pérdida de tiempo, es pérdida de precisión. La carga manual genera errores costosos.',
@@ -72,7 +97,7 @@ const slidesData = [
     textColor: 'text-slate-100'
   },
   {
-    id: 4,
+    id: 5,
     layout: 'spof',
     title: 'El Riesgo Real: SPOF',
     subtitle: 'Single Point of Failure - El punto único de falla que puede paralizar todo.',
@@ -84,7 +109,7 @@ const slidesData = [
     textColor: 'text-slate-100'
   },
   {
-    id: 5,
+    id: 6,
     layout: 'bus_factor_comparison',
     title: 'El "Bus Factor"',
     subtitle: '¿Cuántas personas deben desaparecer de una organización para que esta se paralice?',
@@ -102,41 +127,63 @@ const slidesData = [
     textColor: 'text-slate-100'
   },
   {
-    id: 6,
-    layout: 'features',
-    title: 'La IA como Copiloto',
-    subtitle: 'Olvidemos la ciencia ficción. La IA real es una herramienta accesible que puede trabajar con las empresas todos los días.',
-    items: [
-      { icon: <Clock className="text-blue-400" size={32} />, title: 'Asistente 24/7', desc: 'Trabaja sin descanso y sin errores propios de la fatiga' },
-      { icon: <Brain className="text-cyan-400" size={32} />, title: 'Análisis inteligente', desc: 'Procesa datos, encuentra patrones y genera insights' },
-      { icon: <Zap className="text-indigo-400" size={32} />, title: 'Automatización real', desc: 'Conecta sistemas, mueve datos, ejecuta tareas sin tocar' }
-    ],
-    bg: TECH_BG,
-    textColor: 'text-slate-100'
-  },
-  {
     id: 7,
-    layout: 'tools',
-    title: 'Casos de Uso Reales',
-    subtitle: 'Herramientas que están cambiando la gestión diaria da agencias y plymes',
-    cols: [
+    layout: 'features',
+    title: 'Sistemas Autónomos: Escalar sin Esfuerzo',
+    subtitle: 'La IA no es una herramienta, es la infraestructura que permite que la empresa escale sin que tú seas el motor.',
+    items: [
       {
-        icon: <GitCommit className="text-blue-500 mb-4" size={32} />,
-        title: 'n8n: Automatización 24/7',
-        items: ['Conecta tu CRM con tu contabilidad', 'Genera facturas automaticamente', 'Sincroniza leads sin tocar', 'Flujos que nunca duermen']
+        icon: <Zap className="text-indigo-400" size={32} />,
+        title: 'Loop Infatigable',
+        desc: 'Un sistema que califica, nutre y agenda leads 24/7 de forma 100% autónoma, asegurando que ninguna oportunidad se enfríe.'
       },
       {
-        icon: <LineChart className="text-cyan-500 mb-4" size={32} />,
-        title: 'GPT: Tu Analista Financiero',
-        items: ['Analiza tu hoja de costes en segundos', 'Identifica desviaciones automáticamente', 'Genera reportes ejecutivos', 'Responde preguntas de datos']
+        icon: <Brain className="text-indigo-400" size={32} />,
+        title: 'Inteligencia Operativa',
+        desc: 'Procesamiento de datos en tiempo real para identificar patrones de rentabilidad que hoy son invisibles al ojo humano.'
+      },
+      {
+        icon: <Target className="text-indigo-400" size={32} />,
+        title: 'Escalabilidad Infinita',
+        desc: 'Sistemas que crecen con tu demanda sin necesidad de aumentar proporcionalmente tu estructura de costos fijos.'
       }
     ],
-    footer: 'Estas no son tecnologias del futuro, están disponibles hoy. Y son más accesibles de lo que uno cree.',
     bg: TECH_BG,
     textColor: 'text-slate-100'
   },
   {
     id: 8,
+    layout: 'tools',
+    title: 'Soberanía y Control Total',
+    subtitle: 'Hacia un modelo de gestión basado en la transparencia absoluta de los datos, eliminando la dependencia de reportes manuales.',
+    cols: [
+      {
+        icon: <LineChart className="text-emerald-500 mb-4" size={32} />,
+        title: 'Tablero en el Bolsillo',
+        items: [
+          'Consulta tu pipeline y ROI real desde el celular con un comando',
+          'Eliminación de la espera por reportes operativos semanales',
+          'Alertas automáticas ante desviaciones críticas en tus costos',
+          'Soberanía total: tus datos trabajando para vos, no al revés'
+        ]
+      },
+      {
+        icon: <GitCommit className="text-emerald-500 mb-4" size={32} />,
+        title: 'Ecosistema Conectado',
+        items: [
+          'Sincronización automática entre CRM, Ventas y Contabilidad',
+          'Memoria Institucional: los procesos viven en el sistema, no en cabezas',
+          'Visibilidad 360 de la experiencia del cliente y conversiones',
+          'Independencia total de "islas de información" individuales'
+        ]
+      }
+    ],
+    footer: 'Esto no es tecnología para el futuro; es la infraestructura que separa a las empresas que escalan de las que se estancan.',
+    bg: TECH_BG,
+    textColor: 'text-slate-100'
+  },
+  {
+    id: 9,
     layout: 'limitations',
     title: 'Lo que la IA no tiene',
     subtitle: 'Olvidemos la ciencia ficción. La IA real es una herramienta accesible que puede trabajar con uno todos los días.',
@@ -150,7 +197,7 @@ const slidesData = [
     textColor: 'text-slate-100'
   },
   {
-    id: 9,
+    id: 10,
     layout: 'questions',
     title: 'El Debate',
     subtitle: 'Tres preguntas clave para reflexionar sobre la situación actual de cada uno',
@@ -163,7 +210,7 @@ const slidesData = [
     textColor: 'text-slate-100'
   },
   {
-    id: 10,
+    id: 11,
     layout: 'conclusion',
     title: 'El Momento de Cambiar',
     subtitle: 'La pregunta no es si puedes permitirte la automatización. Es si puedes permitirte no hacerla.',
@@ -188,7 +235,7 @@ const TechGrid = () => (
 );
 
 const MotionContainer = ({ children, bg, textColor, className = "" }) => (
-  <motion.section 
+  <motion.section
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
@@ -214,6 +261,36 @@ const SectionRenderer = ({ slide }) => {
   const isLimitations = slide.layout === 'limitations';
   const isQuestions = slide.layout === 'questions';
   const isConclusion = slide.layout === 'conclusion';
+  const isTitleCard = slide.layout === 'title_card';
+
+  if (isTitleCard) {
+    return (
+      <MotionContainer bg={slide.bg} textColor={slide.textColor} className="flex flex-col items-center justify-center text-center">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUpVariants}
+          className="relative z-10 w-full max-w-5xl flex flex-col items-center space-y-12"
+        >
+          <div className="space-y-8">
+            <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[1.1] drop-shadow-sm max-w-4xl mx-auto">
+              {slide.title}
+            </h1>
+            <div className={`h-1.5 w-48 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto rounded-full`}></div>
+          </div>
+
+          <div className="space-y-4 pt-8">
+            <h3 className="text-3xl md:text-5xl font-bold text-slate-100 italic">
+              {slide.presenter}
+            </h3>
+            <p className="text-xl md:text-2xl text-slate-400 font-light tracking-[0.2em] uppercase">
+              {slide.position}
+            </p>
+          </div>
+        </motion.div>
+      </MotionContainer>
+    );
+  }
 
   if (isIntro) {
     return (
@@ -229,9 +306,9 @@ const SectionRenderer = ({ slide }) => {
 
         <motion.div className="grid md:grid-cols-3 gap-6 w-full max-w-6xl mt-8">
           {slide.steps.map((step, i) => (
-            <motion.div 
-              key={i} 
-              initial="hidden" animate="visible" 
+            <motion.div
+              key={i}
+              initial="hidden" animate="visible"
               variants={{
                 hidden: { opacity: 0, scale: 0.95 },
                 visible: { opacity: 1, scale: 1, transition: { delay: 0.2 + i * 0.1 } }
@@ -259,8 +336,8 @@ const SectionRenderer = ({ slide }) => {
     return (
       <MotionContainer bg={slide.bg} textColor={slide.textColor}>
         <motion.div initial="hidden" animate="visible" variants={fadeUpVariants} className="mb-16">
-          <div className="inline-flex items-center gap-3 mb-6 bg-blue-950/30 border border-blue-900/50 px-4 py-1.5 rounded-full text-blue-400 text-sm font-mono uppercase tracking-widest">
-            <Fingerprint size={16} /> Estructura de Costos
+          <div className={`inline-flex items-center gap-3 mb-6 ${slide.isCrisis ? 'bg-amber-950/30 border-amber-900/50 text-amber-500' : 'bg-blue-950/30 border-blue-900/50 text-blue-400'} border px-4 py-1.5 rounded-full text-sm font-mono uppercase tracking-widest`}>
+            <Fingerprint size={16} /> {slide.isCrisis ? 'Sanción Operativa' : 'Estructura de Costos'}
           </div>
           <h2 className={`text-5xl md:text-7xl font-bold tracking-tight mb-6 text-slate-100`}>{slide.title}</h2>
           <p className="text-xl md:text-2xl text-slate-400 max-w-5xl font-light">{slide.subtitle}</p>
@@ -268,28 +345,45 @@ const SectionRenderer = ({ slide }) => {
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl w-full">
           {slide.cols.map((col, i) => (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               initial="hidden" animate="visible"
               variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { delay: 0.3 + i * 0.1 } }
               }}
-              className={`${CARD_BG} p-10 rounded-xl relative`}
+              className={`${CARD_BG} p-10 rounded-xl relative group transition-all duration-500 hover:border-amber-900/50`}
             >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-50"></div>
-              <div className="bg-[#1E293B]/50 w-14 h-14 rounded-lg flex items-center justify-center mb-8 border border-[#334155]">
-                {col.icon}
+              <div className={`absolute top-0 left-0 w-full h-1 ${slide.isCrisis ? 'bg-gradient-to-r from-amber-600 to-orange-500' : 'bg-gradient-to-r from-blue-600 to-cyan-500'} opacity-30 group-hover:opacity-100 transition-opacity`}></div>
+
+              <div className="flex justify-between items-start mb-8">
+                <div className={`${slide.isCrisis ? 'bg-amber-950/40 border-amber-800/40' : 'bg-[#1E293B]/50 border-[#334155]'} w-14 h-14 rounded-lg flex items-center justify-center border transition-colors`}>
+                  {col.icon}
+                </div>
+                {col.impact && (
+                  <div className="bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-md text-[10px] uppercase tracking-tighter text-amber-500 font-bold">
+                    {col.impact}
+                  </div>
+                )}
               </div>
+
               <h3 className="text-2xl font-bold mb-6 text-white">{col.title}</h3>
-              <ul className="space-y-4">
+              <ul className="space-y-4 mb-8">
                 {col.items.map((item, j) => (
-                  <li key={j} className="flex items-start gap-4 text-slate-400 text-base md:text-lg font-light">
-                    <span className="text-blue-500 mt-1.5 font-mono text-sm">›</span>
-                    <span className="leading-relaxed">{item}</span>
+                  <li key={j} className="flex items-start gap-4 text-slate-400 text-base md:text-lg font-light leading-snug">
+                    <span className={`mt-1.5 font-mono text-sm ${slide.isCrisis ? 'text-amber-500' : 'text-blue-500'}`}>›</span>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
+
+              {slide.isCrisis && (
+                <div className="pt-4 border-t border-[#1E293B] opacity-50 group-hover:opacity-100 transition-opacity">
+                  <p className="text-[11px] font-mono text-slate-500 uppercase tracking-widest">
+                    // Riesgo de Escalabilidad
+                  </p>
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
@@ -312,7 +406,7 @@ const SectionRenderer = ({ slide }) => {
         </motion.div>
         <div className="md:w-1/2 grid gap-6">
           {slide.stats.map((stat, i) => (
-            <motion.div 
+            <motion.div
               key={i}
               initial={{ x: 50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -385,15 +479,15 @@ const SectionRenderer = ({ slide }) => {
           <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }} className={`${CARD_BG} p-10 rounded-xl relative overflow-hidden border border-rose-900/30 shadow-[0_0_30px_-10px_rgba(244,63,94,0.15)]`}>
             <div className="absolute top-0 right-0 w-2 h-full bg-rose-500/50"></div>
             <div className="flex items-center gap-6 mb-8 border-b border-[#1E293B] pb-6">
-               <div className="bg-rose-950/50 p-4 rounded-full text-rose-500 border border-rose-900/50 shadow-inner">
-                   <XCircle size={40} strokeWidth={2.5} />
-               </div>
-               <h3 className="text-3xl font-black text-rose-100 tracking-tight">{slide.bad.title}</h3>
+              <div className="bg-rose-950/50 p-4 rounded-full text-rose-500 border border-rose-900/50 shadow-inner">
+                <XCircle size={40} strokeWidth={2.5} />
+              </div>
+              <h3 className="text-3xl font-black text-rose-100 tracking-tight">{slide.bad.title}</h3>
             </div>
             <p className="text-slate-300 text-xl font-light leading-relaxed mb-8">{slide.bad.desc}</p>
             <div className="rounded-xl overflow-hidden border border-[#1E293B] shadow-2xl relative group">
-                <div className="absolute inset-0 bg-rose-500/10 mix-blend-overlay group-hover:bg-transparent transition-colors duration-500"></div>
-                <img src={slide.bad.image} alt="Bus Factor Alto" className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-rose-500/10 mix-blend-overlay group-hover:bg-transparent transition-colors duration-500"></div>
+              <img src={slide.bad.image} alt="Bus Factor Alto" className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" />
             </div>
           </motion.div>
 
@@ -401,15 +495,15 @@ const SectionRenderer = ({ slide }) => {
           <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.6 }} className={`${CARD_BG} p-10 rounded-xl relative overflow-hidden border border-emerald-900/30 shadow-[0_0_30px_-10px_rgba(16,185,129,0.15)]`}>
             <div className="absolute top-0 right-0 w-2 h-full bg-emerald-500/50"></div>
             <div className="flex items-center gap-6 mb-8 border-b border-[#1E293B] pb-6">
-               <div className="bg-emerald-950/50 p-4 rounded-full text-emerald-500 border border-emerald-900/50 shadow-inner">
-                   <CheckCircle2 size={40} strokeWidth={2.5} />
-               </div>
-               <h3 className="text-3xl font-black text-emerald-100 tracking-tight">{slide.good.title}</h3>
+              <div className="bg-emerald-950/50 p-4 rounded-full text-emerald-500 border border-emerald-900/50 shadow-inner">
+                <CheckCircle2 size={40} strokeWidth={2.5} />
+              </div>
+              <h3 className="text-3xl font-black text-emerald-100 tracking-tight">{slide.good.title}</h3>
             </div>
             <p className="text-slate-300 text-xl font-light leading-relaxed mb-8">{slide.good.desc}</p>
             <div className="rounded-xl overflow-hidden border border-[#1E293B] shadow-2xl relative group">
-                <div className="absolute inset-0 bg-emerald-500/10 mix-blend-overlay group-hover:bg-transparent transition-colors duration-500"></div>
-                <img src={slide.good.image} alt="Bus Factor Bajo" className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-emerald-500/10 mix-blend-overlay group-hover:bg-transparent transition-colors duration-500"></div>
+              <img src={slide.good.image} alt="Bus Factor Bajo" className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" />
             </div>
           </motion.div>
         </div>
@@ -453,8 +547,8 @@ const SectionRenderer = ({ slide }) => {
 
         <div className="grid md:grid-cols-3 gap-8 w-full max-w-6xl">
           {slide.items.map((item, i) => (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3 + i * 0.1 }}
               className={`${CARD_BG} p-10 rounded-xl group relative overflow-hidden`}
             >
@@ -486,8 +580,8 @@ const SectionRenderer = ({ slide }) => {
 
         <div className="grid lg:grid-cols-2 gap-8 w-full max-w-6xl mb-12">
           {slide.cols.map((col, i) => (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 + i * 0.2 }}
               className={`${CARD_BG} p-10 rounded-xl border-t-2 ${i === 0 ? 'border-t-blue-500' : 'border-t-cyan-500'}`}
             >
@@ -519,34 +613,34 @@ const SectionRenderer = ({ slide }) => {
     return (
       <MotionContainer bg={slide.bg} textColor={slide.textColor}>
         <div className="flex flex-col md:flex-row gap-16 items-center">
-            <motion.div initial="hidden" animate="visible" variants={fadeUpVariants} className="md:w-1/3">
-              <div className="inline-flex items-center gap-3 mb-6 bg-amber-950/30 border border-amber-900/50 px-4 py-1.5 rounded-full text-amber-500 text-sm font-mono uppercase tracking-widest">
-                <AlertOctagon size={16} /> Restricciones
-              </div>
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-slate-100">{slide.title}</h2>
-              <p className="text-xl text-slate-400 font-light leading-relaxed">{slide.subtitle}</p>
-            </motion.div>
-
-            <div className="md:w-2/3 grid gap-4 w-full">
-              {slide.items.map((item, i) => (
-                <motion.div 
-                  key={i} 
-                  initial={{ x: 50, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3 + i * 0.1 }}
-                  className={`${CARD_BG} p-6 tracking-wide rounded-xl flex items-center gap-6`}
-                >
-                  <div className="p-3 bg-[#1E293B]/50 rounded-lg border border-[#334155]">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-200">{item.text}</h3>
-                </motion.div>
-              ))}
-              
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="mt-8 border-l-2 border-indigo-500 pl-6">
-                <p className="text-lg font-light text-slate-300">
-                  {slide.footer}
-                </p>
-              </motion.div>
+          <motion.div initial="hidden" animate="visible" variants={fadeUpVariants} className="md:w-1/3">
+            <div className="inline-flex items-center gap-3 mb-6 bg-amber-950/30 border border-amber-900/50 px-4 py-1.5 rounded-full text-amber-500 text-sm font-mono uppercase tracking-widest">
+              <AlertOctagon size={16} /> Restricciones
             </div>
+            <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-slate-100">{slide.title}</h2>
+            <p className="text-xl text-slate-400 font-light leading-relaxed">{slide.subtitle}</p>
+          </motion.div>
+
+          <div className="md:w-2/3 grid gap-4 w-full">
+            {slide.items.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ x: 50, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3 + i * 0.1 }}
+                className={`${CARD_BG} p-6 tracking-wide rounded-xl flex items-center gap-6`}
+              >
+                <div className="p-3 bg-[#1E293B]/50 rounded-lg border border-[#334155]">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold text-slate-200">{item.text}</h3>
+              </motion.div>
+            ))}
+
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="mt-8 border-l-2 border-indigo-500 pl-6">
+              <p className="text-lg font-light text-slate-300">
+                {slide.footer}
+              </p>
+            </motion.div>
+          </div>
         </div>
       </MotionContainer>
     );
@@ -565,8 +659,8 @@ const SectionRenderer = ({ slide }) => {
 
         <div className="grid gap-4 w-full">
           {slide.questions.map((q, i) => (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 + i * 0.1 }}
               className={`${CARD_BG} p-8 rounded-xl flex items-start sm:items-center gap-6`}
             >
@@ -587,7 +681,7 @@ const SectionRenderer = ({ slide }) => {
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           <motion.div initial="hidden" animate="visible" variants={fadeUpVariants} className="w-full">
             <div className="inline-flex items-center gap-3 mb-8 bg-emerald-950/30 border border-emerald-900/50 px-4 py-1.5 rounded-full text-emerald-400 text-sm font-mono uppercase tracking-widest">
-               Siguientes Pasos
+              Siguientes Pasos
             </div>
             <h2 className={`text-6xl md:text-8xl font-black tracking-tighter mb-8 ${HIGHLIGHT_TEXT}`}>{slide.title}</h2>
             <p className="text-2xl md:text-3xl text-slate-400 font-light leading-snug mb-16">{slide.subtitle}</p>
@@ -595,8 +689,8 @@ const SectionRenderer = ({ slide }) => {
 
           <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-20">
             {slide.points.map((point, i) => (
-              <motion.span 
-                key={i} 
+              <motion.span
+                key={i}
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 + i * 0.1 }}
                 className="bg-[#1E293B]/50 text-slate-300 border border-[#334155] px-6 py-3 rounded-lg text-lg font-medium"
               >
@@ -610,7 +704,7 @@ const SectionRenderer = ({ slide }) => {
             className="w-full border-t border-[#1E293B] pt-12"
           >
             <p className="text-xl md:text-2xl font-mono tracking-tight text-slate-500">
-              <span className="text-green-500 mr-2">root@sistemas:~#</span> 
+              <span className="text-green-500 mr-2">root@sistemas:~#</span>
               {slide.footer}
               <span className="inline-block w-3 h-6 bg-slate-500 ml-2 align-middle animate-pulse"></span>
             </p>
@@ -650,15 +744,15 @@ export default function App() {
     <div className="fixed inset-0 bg-[#0B1120] text-slate-50 font-sans selection:bg-blue-500/30 overflow-hidden">
       {/* Top Bar Area */}
       <div className="fixed top-0 left-0 right-0 h-16 border-b border-[#1E293B] bg-[#0B1120]/80 backdrop-blur-md z-50 flex items-center justify-between px-8">
-         <div className="flex items-center gap-3">
-             <div className="w-6 h-6 rounded bg-gradient-to-br from-blue-500 to-cyan-400"></div>
-             <span className="font-bold text-sm tracking-widest text-slate-200">
-               OP // SISTEMAS
-             </span>
-         </div>
-         <div className="font-mono text-xs tracking-widest text-slate-500">
-            SLIDE_{String(currentSlide + 1).padStart(2, '0')} / {String(slidesData.length).padStart(2, '0')}
-         </div>
+        <div className="flex items-center gap-3">
+          <div className="w-6 h-6 rounded bg-gradient-to-br from-blue-500 to-cyan-400"></div>
+          <span className="font-bold text-sm tracking-widest text-slate-200">
+            OP // SISTEMAS
+          </span>
+        </div>
+        <div className="font-mono text-xs tracking-widest text-slate-500">
+          SLIDE_{String(currentSlide + 1).padStart(2, '0')} / {String(slidesData.length).padStart(2, '0')}
+        </div>
       </div>
 
       <AnimatePresence mode="wait">
@@ -667,25 +761,25 @@ export default function App() {
 
       {/* Manual Controls for easy clicking / Canva prepping */}
       <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 bg-[#0B1120]/90 border border-[#1E293B] shadow-2xl px-6 py-3 rounded-full backdrop-blur-md">
-        <button 
+        <button
           onClick={prevSlide}
           disabled={currentSlide === 0}
           className="text-slate-400 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
         >
           <ChevronLeft size={24} />
         </button>
-        
+
         <div className="flex gap-2">
-           {slidesData.map((_, i) => (
-             <button 
-               key={i} 
-               onClick={() => setCurrentSlide(i)}
-               className={`w-2 h-2 rounded-full transition-all ${i === currentSlide ? 'bg-cyan-400 w-6' : 'bg-slate-700'}`} 
-             />
-           ))}
+          {slidesData.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentSlide(i)}
+              className={`w-2 h-2 rounded-full transition-all ${i === currentSlide ? 'bg-cyan-400 w-6' : 'bg-slate-700'}`}
+            />
+          ))}
         </div>
 
-        <button 
+        <button
           onClick={nextSlide}
           disabled={currentSlide === slidesData.length - 1}
           className="text-slate-400 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
