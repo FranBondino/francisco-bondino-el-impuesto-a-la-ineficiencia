@@ -110,7 +110,7 @@ const slidesData = [
   {
     id: 6,
     layout: 'spof',
-    title: 'El Cuello de Botella Humano',
+    title: 'Punto Unico de falla (SPOF)',
     subtitle: 'Cuando el crecimiento depende de una memoria individual, el negocio tiene un techo invisible de cristal.',
     alert: 'En empresas en crecimiento, el punto único de falla (SPOF) suele tener nombre y apellido.',
     bg: TECH_BG,
