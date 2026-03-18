@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/francisco-bondino-el-impuesto-a-la-ineficiencia/',
+  base: './',
   plugins: [
     tailwindcss(),
     react()
