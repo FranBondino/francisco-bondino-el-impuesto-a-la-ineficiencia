@@ -19,6 +19,7 @@ const TECH_BG = "bg-[#0B1120]"; // Very dark slate/blue
 const HIGHLIGHT_TEXT = "text-blue-400 sm:text-transparent sm:bg-clip-text sm:bg-gradient-to-r sm:from-blue-400 sm:to-cyan-400";
 const ACCENT_COLOR = "text-blue-400";
 const SECONDARY_ACCENT = "text-cyan-400";
+const CARD_BG = "bg-[#111827]/50 backdrop-blur-sm border border-slate-800/50";
 
 const slidesData = [
   {
