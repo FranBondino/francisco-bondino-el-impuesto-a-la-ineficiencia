@@ -6,7 +6,7 @@ import {
   Clock, Brain, Zap, GitCommit, LineChart, Lightbulb,
   UserCheck, BookOpen, MessageSquare, Rocket,
   ChevronLeft, ChevronRight, Fingerprint,
-  CheckCircle2, Award, Printer, User, MousePointer2
+  CheckCircle2, Award, Printer, User
 } from 'lucide-react';
 
 import busFactorAltoImg from './assets/bus-factor-alto.png';
@@ -813,16 +813,6 @@ export default function App() {
     };
   }, []);
 
-  const [isPointerActive, setIsPointerActive] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    if (!isPointerActive) return;
-    const handleMouseMove = (e) => setMousePos({ x: e.clientX, y: e.clientY });
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [isPointerActive]);
-
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1 < slidesData.length ? prev + 1 : prev));
   }, []);
@@ -874,22 +864,13 @@ export default function App() {
     >
       {/* Top Bar Area */}
       <div className="fixed top-0 left-0 right-0 h-14 sm:h-16 border-b border-[#1E293B] bg-[#0B1120]/80 backdrop-blur-md z-50 flex items-center justify-between px-4 sm:px-8">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className="w-5 h-5 sm:w-6 sm:h-6 rounded bg-gradient-to-br from-blue-500 to-cyan-400"></div>
-          <span className="font-bold text-[10px] sm:text-sm tracking-[0.1em] sm:tracking-widest text-slate-200 uppercase">
-            OP // SISTEMAS
+        <div className="flex items-center gap-2 sm:gap-3 max-w-[50%] overflow-hidden">
+          <div className="w-4 h-4 sm:w-5 sm:h-5 rounded bg-gradient-to-br from-blue-500 to-cyan-400 shrink-0"></div>
+          <span className="font-bold text-[9px] sm:text-xs tracking-wider text-slate-300 uppercase truncate">
+            {slidesData[0].title}
           </span>
         </div>
         <div className="flex items-center gap-4 sm:gap-6">
-          <button
-            onClick={() => setIsPointerActive(!isPointerActive)}
-            className={`flex items-center gap-2 ${isPointerActive ? 'text-red-500' : 'text-slate-400'} hover:text-red-400 transition-colors group`}
-            title="Activar Puntero Láser Digital"
-          >
-            {/* Assuming MousePointer2 is imported from 'lucide-react' */}
-            <MousePointer2 size={18} className={isPointerActive ? 'animate-pulse' : ''} />
-            <span className="hidden sm:inline text-xs font-mono tracking-widest uppercase">Láser</span>
-          </button>
           <button
             onClick={() => {
               setIsPrintMode(true);
@@ -908,14 +889,6 @@ export default function App() {
           </div>
         </div>
       </div>
-
-      {isPointerActive && (
-        <motion.div
-          className="fixed pointer-events-none z-[10000] w-5 h-5 rounded-full bg-red-600 shadow-[0_0_20px_6px_rgba(220,38,38,0.8)] blur-[1px]"
-          animate={{ x: mousePos.x - 10, y: mousePos.y - 10 }}
-          transition={{ type: "spring", damping: 25, stiffness: 250, mass: 0.5 }}
-        />
-      )}
 
       {isPrintMode ? (
         <div className="print-view bg-[#0B1120] min-h-screen">
