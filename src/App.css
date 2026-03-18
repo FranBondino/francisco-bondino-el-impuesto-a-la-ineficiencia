@@ -182,3 +182,70 @@
     border-right-color: var(--border);
   }
 }
+
+@media print {
+  @page {
+    size: landscape;
+    margin: 0;
+  }
+
+  body, html {
+    background: #0B1120 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide navigation controls and interactive elements */
+  .fixed.bottom-4, 
+  .fixed.bottom-8,
+  button,
+  .z-50 {
+    display: none !important;
+  }
+
+  /* Show only the slide content */
+  .print-view {
+    display: block !important;
+  }
+
+  .print-slide-wrapper {
+    page-break-after: always !important;
+    height: 100vh !important;
+    width: 100vw !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: #0B1120 !important;
+  }
+
+  .motion-section {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 4rem !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Ensure the tech grid doesn't overpower the content in print */
+  .motion-section > div:first-child {
+    opacity: 0.05 !important;
+  }
+
+  /* Ensure images and text are visible */
+  img {
+    max-height: 60vh !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
+
+  h1, h2, h3, p, li {
+    break-inside: avoid !important;
+  }
+}

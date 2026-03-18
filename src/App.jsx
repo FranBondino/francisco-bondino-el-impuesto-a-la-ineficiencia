@@ -6,7 +6,7 @@ import {
   Clock, Brain, Zap, GitCommit, LineChart, Lightbulb,
   UserCheck, BookOpen, MessageSquare, Rocket,
   ChevronLeft, ChevronRight, Fingerprint,
-  CheckCircle2, Award
+  CheckCircle2, Award, Printer
 } from 'lucide-react';
 
 import busFactorAltoImg from './assets/bus-factor-alto.png';
@@ -251,10 +251,10 @@ const MotionContainer = ({ children, bg, textColor, className = "" }) => (
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     transition={{ duration: 0.5, ease: "easeInOut" }}
-    className={`fixed inset-0 w-full h-full flex flex-col items-center justify-start md:justify-center py-16 md:py-20 px-4 sm:px-12 md:px-24 ${bg} ${textColor || ''} overflow-y-auto overflow-x-hidden`}
+    className={`motion-section fixed inset-0 w-full h-full flex flex-col items-center justify-start md:justify-center py-16 md:py-20 px-6 sm:px-12 md:px-24 ${bg} ${textColor || ''} overflow-y-auto overflow-x-hidden`}
   >
     <TechGrid />
-    <div className={`max-w-6xl mx-auto w-full z-10 relative pt-8 pb-32 md:py-8 ${className}`}>
+    <div className={`max-w-6xl mx-auto w-full z-10 relative pt-10 pb-36 md:py-8 ${className}`}>
       {children}
     </div>
   </motion.section>
@@ -757,6 +757,18 @@ const SectionRenderer = ({ slide }) => {
 
 export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPrintMode, setIsPrintMode] = useState(false);
+
+  useEffect(() => {
+    const handleBeforePrint = () => setIsPrintMode(true);
+    const handleAfterPrint = () => setIsPrintMode(false);
+    window.addEventListener('beforeprint', handleBeforePrint);
+    window.addEventListener('afterprint', handleAfterPrint);
+    return () => {
+      window.removeEventListener('beforeprint', handleBeforePrint);
+      window.removeEventListener('afterprint', handleAfterPrint);
+    };
+  }, []);
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1 < slidesData.length ? prev + 1 : prev));
@@ -801,7 +813,7 @@ export default function App() {
   }, [nextSlide, prevSlide]);
 
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-[#0B1120] text-slate-50 font-sans selection:bg-blue-500/30 overflow-hidden"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
@@ -815,31 +827,52 @@ export default function App() {
             OP // SISTEMAS
           </span>
         </div>
-        <div className="font-mono text-xs tracking-widest text-slate-500">
-          SLIDE_{String(currentSlide + 1).padStart(2, '0')} / {String(slidesData.length).padStart(2, '0')}
+        <div className="flex items-center gap-4 sm:gap-6">
+          <button
+            onClick={() => window.print()}
+            className="flex items-center gap-2 text-slate-400 hover:text-blue-400 transition-colors group"
+            title="Exportar a PDF (para Google Slides/Canva)"
+          >
+            <Printer size={18} className="group-hover:scale-110 transition-transform" />
+            <span className="hidden sm:inline text-xs font-mono tracking-widest uppercase">PDF</span>
+          </button>
+          <div className="font-mono text-xs tracking-widest text-slate-500">
+            SLIDE_{String(currentSlide + 1).padStart(2, '0')} / {String(slidesData.length).padStart(2, '0')}
+          </div>
         </div>
       </div>
 
-      <AnimatePresence mode="wait">
-        <SectionRenderer key={slidesData[currentSlide].id} slide={slidesData[currentSlide]} />
-      </AnimatePresence>
+      {isPrintMode ? (
+        <div className="print-view bg-[#0B1120] min-h-screen">
+          {slidesData.map((slide) => (
+            <div key={slide.id} className="print-slide-wrapper">
+              <SectionRenderer slide={slide} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <AnimatePresence>
+          <SectionRenderer key={slidesData[currentSlide].id} slide={slidesData[currentSlide]} />
+        </AnimatePresence>
+      )}
 
       {/* Manual Controls for easy clicking / Canva prepping */}
-      <div className="fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 sm:gap-6 bg-[#0B1120]/90 border border-[#1E293B] shadow-2xl px-4 sm:px-6 py-2 sm:py-3 rounded-full backdrop-blur-md">
+      <div className="fixed bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 sm:gap-6 bg-[#0B1120]/90 border border-[#1E293B] shadow-2xl px-5 sm:px-6 py-3 sm:py-3 rounded-full backdrop-blur-md">
         <button
           onClick={prevSlide}
           disabled={currentSlide === 0}
-          className="text-slate-400 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed p-1 sm:p-2"
+          className="text-slate-400 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed p-2"
         >
-          <ChevronLeft size={20} sm:size={24} />
+          <ChevronLeft size={24} />
         </button>
 
-        <div className="flex gap-1.5 sm:gap-2">
+        <div className="flex gap-2 sm:gap-2 items-center">
           {slidesData.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrentSlide(i)}
-              className={`h-1.5 rounded-full transition-all ${i === currentSlide ? 'bg-cyan-400 w-4 sm:w-6' : 'bg-slate-700 w-1.5'}`}
+              className={`h-2.5 rounded-full transition-all ${i === currentSlide ? 'bg-cyan-400 w-5 sm:w-6' : 'bg-slate-700 w-2.5'}`}
+              aria-label={`Go to slide ${i + 1}`}
             />
           ))}
         </div>
@@ -847,9 +880,9 @@ export default function App() {
         <button
           onClick={nextSlide}
           disabled={currentSlide === slidesData.length - 1}
-          className="text-slate-400 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed p-1 sm:p-2"
+          className="text-slate-400 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed p-2"
         >
-          <ChevronRight size={20} sm:size={24} />
+          <ChevronRight size={24} />
         </button>
       </div>
     </div>
