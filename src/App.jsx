@@ -248,7 +248,7 @@ const MotionContainer = ({ children, bg, textColor, className = "" }) => (
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     transition={{ duration: 0.5, ease: "easeInOut" }}
-    className={`motion-section fixed inset-0 w-full h-full flex flex-col items-center justify-start md:justify-center py-16 md:py-20 px-6 sm:px-12 md:px-24 ${bg} ${textColor || ''} overflow-y-auto overflow-x-hidden`}
+    className={`motion-section fixed inset-0 w-full h-[100dvh] flex flex-col items-center justify-start md:justify-center py-12 md:py-20 px-5 sm:px-12 md:px-24 ${bg} ${textColor || ''} overflow-y-auto overflow-x-hidden`}
   >
     <TechGrid />
     <div className={`max-w-6xl mx-auto w-full z-10 relative pt-10 pb-36 md:py-8 ${className}`}>
@@ -282,7 +282,7 @@ const SectionRenderer = ({ slide }) => {
           className="relative z-10 w-full max-w-5xl flex flex-col items-center space-y-12"
         >
           <div className="space-y-6 sm:space-y-8">
-            <h1 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight leading-[1.1] drop-shadow-sm max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight leading-[1.1] drop-shadow-sm max-w-4xl mx-auto">
               {slide.title}
             </h1>
             <div className={`h-1 w-24 sm:h-1.5 sm:w-48 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto rounded-full`}></div>
@@ -599,16 +599,16 @@ const SectionRenderer = ({ slide }) => {
           <div className="inline-flex items-center gap-3 mb-6 bg-blue-950/30 border border-blue-900/50 px-4 py-1.5 rounded-full text-blue-400 text-sm font-mono uppercase tracking-widest">
             <Brain size={16} /> Infraestructura Cognitiva
           </div>
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-slate-100">{slide.title}</h2>
-          <p className="text-xl md:text-2xl text-slate-400 max-w-4xl font-light">{slide.subtitle}</p>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6 text-slate-100">{slide.title}</h2>
+          <p className="text-lg sm:text-xl md:text-2xl text-slate-400 max-w-4xl font-light">{slide.subtitle}</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 w-full max-w-6xl">
+        <div className="grid md:grid-cols-3 gap-6 sm:gap-8 w-full max-w-6xl">
           {slide.items.map((item, i) => (
             <motion.div
               key={i}
               initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3 + i * 0.1 }}
-              className={`${CARD_BG} p-10 rounded-xl group relative overflow-hidden`}
+              className={`${CARD_BG} p-6 sm:p-10 rounded-xl group relative overflow-hidden`}
             >
               <div className="absolute -right-4 -top-4 opacity-5 group-hover:scale-110 transition-transform">
                 {React.cloneElement(item.icon, { size: 120 })}
@@ -632,8 +632,8 @@ const SectionRenderer = ({ slide }) => {
           <div className="inline-flex items-center gap-3 mb-6 bg-cyan-950/30 border border-cyan-900/50 px-4 py-1.5 rounded-full text-cyan-400 text-sm font-mono uppercase tracking-widest">
             <Zap size={16} /> Stack Tecnológico
           </div>
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-slate-100">{slide.title}</h2>
-          <p className="text-xl md:text-2xl text-slate-400 mb-16 font-light max-w-4xl">{slide.subtitle}</p>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6 text-slate-100">{slide.title}</h2>
+          <p className="text-lg sm:text-xl md:text-2xl text-slate-400 mb-8 sm:mb-16 font-light max-w-4xl">{slide.subtitle}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 w-full max-w-6xl mb-12">
@@ -711,8 +711,8 @@ const SectionRenderer = ({ slide }) => {
           <div className="inline-flex items-center gap-3 mb-6 bg-indigo-950/30 border border-indigo-900/50 px-4 py-1.5 rounded-full text-indigo-400 text-sm font-mono uppercase tracking-widest">
             <Target size={16} /> Evaluación
           </div>
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-slate-100">{slide.title}</h2>
-          <p className="text-xl text-slate-400 max-w-3xl font-light">{slide.subtitle}</p>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6 text-slate-100">{slide.title}</h2>
+          <p className="text-lg sm:text-xl text-slate-400 max-w-3xl font-light">{slide.subtitle}</p>
         </motion.div>
 
         <div className="grid gap-4 w-full">
@@ -776,8 +776,8 @@ const SectionRenderer = ({ slide }) => {
     return (
       <MotionContainer bg={slide.bg} textColor={slide.textColor} className="flex flex-col items-center">
         <motion.div initial="hidden" animate="visible" variants={fadeUpVariants} className="text-center mb-12">
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-slate-100">{slide.title}</h2>
-          <p className="text-2xl md:text-4xl text-blue-400 font-light italic">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6 sm:mb-8 text-slate-100">{slide.title}</h2>
+          <p className="text-xl sm:text-2xl md:text-4xl text-blue-400 font-light italic">
             "{slide.subtitle}"
           </p>
         </motion.div>
@@ -864,7 +864,7 @@ export default function App() {
     >
       {/* Top Bar Area */}
       <div className="fixed top-0 left-0 right-0 h-14 sm:h-16 border-b border-[#1E293B] bg-[#0B1120]/80 backdrop-blur-md z-50 flex items-center justify-between px-4 sm:px-8">
-        <div className="flex items-center gap-2 sm:gap-3 max-w-[50%] overflow-hidden">
+        <div className="flex items-center gap-2 sm:gap-3 max-w-[65%] sm:max-w-[50%] overflow-hidden">
           <div className="w-4 h-4 sm:w-5 sm:h-5 rounded bg-gradient-to-br from-blue-500 to-cyan-400 shrink-0"></div>
           <span className="font-bold text-[9px] sm:text-xs tracking-wider text-slate-300 uppercase truncate">
             {slidesData[0].title}
@@ -905,21 +905,21 @@ export default function App() {
       )}
 
       {/* Manual Controls for easy clicking / Canva prepping */}
-      <div className="fixed bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 sm:gap-6 bg-[#0B1120]/90 border border-[#1E293B] shadow-2xl px-5 sm:px-6 py-3 sm:py-3 rounded-full backdrop-blur-md">
+      <div className="fixed bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 sm:gap-6 bg-[#0B1120]/90 border border-[#1E293B] shadow-2xl px-3 sm:px-6 py-2 sm:py-3 rounded-full backdrop-blur-md w-[90%] sm:w-auto justify-center">
         <button
           onClick={prevSlide}
           disabled={currentSlide === 0}
-          className="text-slate-400 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed p-2"
+          className="text-slate-400 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed p-1 sm:p-2 shrink-0"
         >
-          <ChevronLeft size={24} />
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
-        <div className="flex gap-2 sm:gap-2 items-center">
+        <div className="flex gap-1.5 sm:gap-2 items-center overflow-x-auto no-scrollbar py-1">
           {slidesData.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrentSlide(i)}
-              className={`h-2.5 rounded-full transition-all ${i === currentSlide ? 'bg-cyan-400 w-5 sm:w-6' : 'bg-slate-700 w-2.5'}`}
+              className={`rounded-full transition-all shrink-0 ${i === currentSlide ? 'bg-cyan-400 w-4 sm:w-6 h-2 sm:h-2.5' : 'bg-slate-700 w-2 sm:w-2.5 h-2 sm:h-2.5'}`}
               aria-label={`Go to slide ${i + 1}`}
             />
           ))}
@@ -928,9 +928,9 @@ export default function App() {
         <button
           onClick={nextSlide}
           disabled={currentSlide === slidesData.length - 1}
-          className="text-slate-400 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed p-2"
+          className="text-slate-400 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed p-1 sm:p-2 shrink-0"
         >
-          <ChevronRight size={24} />
+          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       </div>
     </div>
