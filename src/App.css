@@ -11,6 +11,7 @@
   &:hover {
     border-color: var(--accent-border);
   }
+
   &:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
@@ -42,8 +43,7 @@
     z-index: 1;
     top: 34px;
     height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
+    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg) scale(1.4);
   }
 
   .vite {
@@ -51,8 +51,7 @@
     top: 107px;
     height: 26px;
     width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
+    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg) scale(0.8);
   }
 }
 
@@ -75,9 +74,10 @@
   border-top: 1px solid var(--border);
   text-align: left;
 
-  & > div {
+  &>div {
     flex: 1 1 0;
     padding: 32px;
+
     @media (max-width: 1024px) {
       padding: 24px 20px;
     }
@@ -130,6 +130,7 @@
     &:hover {
       box-shadow: var(--shadow);
     }
+
     .button-icon {
       height: 18px;
       width: 18px;
@@ -156,6 +157,7 @@
 #spacer {
   height: 88px;
   border-top: 1px solid var(--border);
+
   @media (max-width: 1024px) {
     height: 48px;
   }
@@ -177,6 +179,7 @@
     left: 0;
     border-left-color: var(--border);
   }
+
   &::after {
     right: 0;
     border-right-color: var(--border);
@@ -185,36 +188,48 @@
 
 @media print {
   @page {
-    size: landscape;
-    margin: 0;
+    size: landscape !important;
+    margin: 0 !important;
   }
 
-  body, html {
-    background: #0B1120 !important;
+  body,
+  html,
+  #root,
+  .print-view {
+    background-color: #0B1120 !important;
+    color: #f8fafc !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
     margin: 0 !important;
     padding: 0 !important;
   }
 
-  /* Hide navigation controls and interactive elements */
-  .fixed.bottom-4, 
-  .fixed.bottom-8,
+  /* Hide interactive elements and UI */
+  .fixed,
+  .z-50,
+  nav,
   button,
-  .z-50 {
+  [role="button"],
+  .pointer-events-auto {
     display: none !important;
+    visibility: hidden !important;
   }
 
-  /* Show only the slide content */
+  /* Show only the print view */
   .print-view {
     display: block !important;
+    background-color: #0B1120 !important;
   }
 
   .print-slide-wrapper {
     page-break-after: always !important;
+    break-after: page !important;
     height: 100vh !important;
     width: 100vw !important;
     position: relative !important;
     overflow: hidden !important;
-    background: #0B1120 !important;
+    background-color: #0B1120 !important;
   }
 
   .motion-section {
@@ -226,26 +241,21 @@
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
-    padding: 4rem !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
+    padding: 2rem !important;
     transform: none !important;
     opacity: 1 !important;
+    background-color: #0B1120 !important;
   }
 
-  /* Ensure the tech grid doesn't overpower the content in print */
-  .motion-section > div:first-child {
-    opacity: 0.05 !important;
+  /* Ensure text is readable and graphics are forced */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  /* Ensure images and text are visible */
   img {
-    max-height: 60vh !important;
+    max-height: 70vh !important;
     width: auto !important;
     object-fit: contain !important;
-  }
-
-  h1, h2, h3, p, li {
-    break-inside: avoid !important;
   }
 }

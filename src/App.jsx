@@ -891,7 +891,12 @@ export default function App() {
             <span className="hidden sm:inline text-xs font-mono tracking-widest uppercase">Láser</span>
           </button>
           <button
-            onClick={() => window.print()}
+            onClick={() => {
+              setIsPrintMode(true);
+              setTimeout(() => {
+                window.print();
+              }, 500);
+            }}
             className="flex items-center gap-2 text-slate-400 hover:text-blue-400 transition-colors group"
             title="Exportar a PDF (para Google Slides/Canva)"
           >
