@@ -14,3 +14,42 @@
   flex-direction: column;
   justify-content: center;
 }
+
+@media print {
+  @page {
+    size: 1920px 1080px;
+    margin: 0;
+  }
+  
+  html, body {
+    width: 1920px !important;
+    height: auto !important;
+    background-color: #0B1120 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .print-slide-wrapper {
+    width: 1920px !important;
+    height: 1080px !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background-color: #0B1120 !important;
+  }
+  
+  .motion-section {
+    position: relative !important;
+    width: 1920px !important;
+    height: 1080px !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

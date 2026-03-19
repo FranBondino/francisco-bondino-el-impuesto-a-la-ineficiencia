@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import {
   TrendingUp, Activity, XCircle, FileText,
   LifeBuoy, Target, Calculator, AlertOctagon, Bus,
@@ -905,13 +905,15 @@ export default function App() {
     >
       {/* Main Content */}
       {isPrintMode ? (
-        <div className="print-view bg-[#0B1120] min-h-screen">
-          {slidesData.map((slide) => (
-            <div key={slide.id} className="print-slide-wrapper">
-              <SectionRenderer slide={slide} />
-            </div>
-          ))}
-        </div>
+        <MotionConfig transition={{ duration: 0, delay: 0 }} reducedMotion="always">
+          <div className="print-view bg-[#0B1120] w-full overflow-hidden">
+            {slidesData.map((slide) => (
+              <div key={slide.id} className="print-slide-wrapper bg-[#0B1120]">
+                <SectionRenderer slide={slide} />
+              </div>
+            ))}
+          </div>
+        </MotionConfig>
       ) : (
         <AnimatePresence>
           <SectionRenderer key={slidesData[currentSlide].id} slide={slidesData[currentSlide]} />
