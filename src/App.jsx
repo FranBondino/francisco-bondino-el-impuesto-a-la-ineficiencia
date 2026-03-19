@@ -826,10 +826,10 @@ const SectionRenderer = ({ slide }) => {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="relative w-full sm:w-[85vw] h-[35vh] sm:h-[50vh] rounded-2xl overflow-hidden border-4 border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.2)]"
+            className="relative w-full sm:w-[85vw] max-w-6xl h-[35vh] sm:h-[50vh] lg:h-[60vh] rounded-2xl overflow-hidden border-4 border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.2)]"
           >
           <div className="absolute inset-0 bg-cyan-500/10 mix-blend-overlay group-hover:bg-transparent transition-colors duration-1000 z-10 pointer-events-none"></div>
-          <img src={slide.image} alt={slide.subtitle} className="w-full max-h-[45vh] lg:max-h-[50vh] object-cover object-[center_20%] transform transition-transform duration-[15s] ease-out hover:scale-[1.03]" />
+          <img src={slide.image} alt={slide.subtitle} className="w-full h-full object-cover object-[center_20%] transform transition-transform duration-[15s] ease-out hover:scale-[1.03]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-[#0B1120]/10 to-transparent opacity-60 z-0 pointer-events-none"></div>
         </motion.div>
       </MotionContainer>
