@@ -212,8 +212,8 @@ const slidesData = [
     subtitle: 'Tres preguntas clave para reflexionar sobre la situación actual de cada uno',
     questions: [
       '¿Pueden identificar los procesos que les generan "dolor"?',
-      '¿Cuántos de ustedes cuentan con una memoria institucional?',
-      '¿Cuántos de ustedes sienten que la IA puede aplicarse en su empresa?'
+      '¿Cuántas de ustedes sienten que la IA puede aplicarse en su empresa?',
+      '¿Cuántas de ustedes cuentan con una memoria institucional?'
     ],
     bg: TECH_BG,
     textColor: 'text-slate-100'
